@@ -20,8 +20,14 @@ else
     echo "==> Dependencias ya instaladas, saltando composer install..."
 fi
 
+echo "==> Verificando archivo .env..."
+if [ ! -f ".env" ] && [ -f ".env.example" ]; then
+    cp .env.example .env
+fi
+
 echo "==> Verificando APP_KEY..."
-php artisan key:generate --no-interaction 2>/dev/null || true
+php artisan key:generate --no-interaction --force 2>/dev/null || true
+php artisan jwt:secret --no-interaction --force 2>/dev/null || true
 
 echo "==> Limpiando cache de configuracion y rutas..."
 php artisan config:clear

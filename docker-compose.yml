@@ -33,8 +33,12 @@ services:
       mongodb:
         condition: service_healthy
     environment:
+      - DB_CONNECTION=pgsql
       - DB_HOST=plantillawiki_db
       - DB_PORT=5432
+      - DB_DATABASE=plantillawiki
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=wikitda
       - CACHE_STORE=redis
       - MONGODB_HOST=plantillawiki_mongo
       - MONGODB_PORT=27017
