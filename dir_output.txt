@@ -1,0 +1,15 @@
+total 103
+drwxr-xr-x 1 Nehemias 197121     0 Nov  8 20:52 ./
+drwxr-xr-x 1 Nehemias 197121     0 Nov  7 09:57 ../
+drwxr-xr-x 1 Nehemias 197121     0 Nov  8 20:51 .git/
+-rw-r--r-- 1 Nehemias 197121   139 Oct 17 09:23 .gitignore
+drwxr-xr-x 1 Nehemias 197121     0 Oct 17 09:23 .turbo/
+drwxr-xr-x 1 Nehemias 197121     0 Oct 17 09:23 apps/
+-rw-r--r-- 1 Nehemias 197121  2321 Oct 17 09:23 comandos.md
+-rw-r--r-- 1 Nehemias 197121     0 Nov  8 20:52 dir_output.txt
+-rw-r--r-- 1 Nehemias 197121  2713 Oct 31 10:16 docker-compose.yml
+-rw-r--r-- 1 Nehemias 197121   654 Oct 17 09:23 package.json
+-rw-r--r-- 1 Nehemias 197121 72746 Oct 17 09:23 pnpm-lock.yaml
+-rw-r--r-- 1 Nehemias 197121    23 Oct 17 09:23 pnpm-workspace.yaml
+-rw-r--r-- 1 Nehemias 197121  4705 Oct 31 10:51 README.md
+-rw-r--r-- 1 Nehemias 197121   322 Oct 17 09:23 turbo.json

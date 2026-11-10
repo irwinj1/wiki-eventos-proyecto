@@ -1,0 +1,8 @@
+CONTAINER ID   IMAGE                              COMMAND                  CREATED        STATUS                   PORTS                                             NAMES
+3ac6814883f8   nginx:alpine                       "/docker-entrypoint.…"   34 hours ago   Up 6 minutes             0.0.0.0:8006->80/tcp, [::]:8006->80/tcp           plantillawiki_nginx
+a110b53f5cab   wiki-tda-frontend                  "docker-entrypoint.s…"   34 hours ago   Up 6 minutes             0.0.0.0:3006->80/tcp, [::]:3006->80/tcp           plantillawiki_frontend
+4dec9241dc71   wiki-tda-php                       "/usr/local/bin/entr…"   34 hours ago   Up 6 minutes             9000/tcp                                          plantillawiki_php
+1c86ef2b5ca0   ghcr.io/openclaw/openclaw:latest   "tini -s -- sh -c 'n…"   35 hours ago   Up 7 minutes (healthy)   127.0.0.1:18789->18789/tcp                        openclaw
+fd01f2d974d9   postgres:17-alpine                 "docker-entrypoint.s…"   10 days ago    Up 6 minutes (healthy)   0.0.0.0:5439->5432/tcp, [::]:5439->5432/tcp       plantillawiki_db
+19e0dc5ac4bc   redis:alpine                       "docker-entrypoint.s…"   10 days ago    Up 6 minutes (healthy)   0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp       plantillawiki_redis
+f1d5170bdffa   mongo:4.4-bionic                   "docker-entrypoint.s…"   10 days ago    Up 6 minutes (healthy)   0.0.0.0:27018->27017/tcp, [::]:27018->27017/tcp   plantillawiki_mongo

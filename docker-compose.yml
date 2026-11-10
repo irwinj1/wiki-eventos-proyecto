@@ -1,0 +1,114 @@
+services:
+  frontend:
+    build:
+      context: ./apps/plantillawiki-front
+      dockerfile: Dockerfile
+    container_name: plantillawiki_frontend
+    volumes:
+      - ./apps/plantillawiki-front:/app
+      - /app/node_modules
+    ports:
+      - "3006:80"
+    environment:
+      - NODE_ENV=development
+      - PORT=80
+    networks:
+      - plantillawiki_network
+
+  php:
+    build:
+      context: ./apps/plantillawiki
+      dockerfile: Dockerfile
+    container_name: plantillawiki_php
+    volumes:
+      - ./apps/plantillawiki:/var/www
+      - ./apps/plantillawiki/docker/php/entrypoint.sh:/usr/local/bin/entrypoint.sh
+    working_dir: /var/www
+    depends_on:
+      pgsql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    environment:
+      - DB_HOST=plantillawiki_db
+      - DB_PORT=5432
+      - CACHE_STORE=redis
+      - MONGODB_HOST=plantillawiki_mongo
+      - MONGODB_PORT=27017
+      - REDIS_HOST=plantillawiki_redis
+      - REDIS_PORT=6379
+    networks:
+      - plantillawiki_network
+
+  nginx:
+    image: nginx:alpine
+    container_name: plantillawiki_nginx
+    ports:
+      - "8006:80"
+    volumes:
+      - ./apps/plantillawiki:/var/www
+      - ./apps/plantillawiki/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - plantillawiki_network
+
+  pgsql:
+    image: postgres:17-alpine
+    container_name: plantillawiki_db
+    ports:
+      - "5439:5432"
+    environment:
+      POSTGRES_DB: plantillawiki
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: wikitda
+    volumes:
+      - plantillawiki_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d plantillawiki"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - plantillawiki_network
+
+  redis:
+    image: redis:alpine
+    container_name: plantillawiki_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - plantillawiki_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - plantillawiki_network
+
+  mongodb:
+    image: mongo:4.4-bionic
+    container_name: plantillawiki_mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - plantillawiki_mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - plantillawiki_network
+
+volumes:
+  plantillawiki_postgres_data:
+  plantillawiki_redis_data:
+  plantillawiki_mongo_data:
+
+networks:
+  plantillawiki_network:
+    driver: bridge

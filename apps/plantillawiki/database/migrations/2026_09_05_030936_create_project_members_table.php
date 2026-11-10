@@ -1,0 +1,49 @@
+<?php
+/**
+ * @project Wiki TDA - Plataforma Universitaria de Conocimiento, Eventos y Proyectos
+ * @author Irwin Jose Maria Esperanza Guardado (Creador y Autor Original)
+ * @license CC-BY-NC-SA-4.0 (Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional)
+ * @notice Prohibido patentar, cerrar el código o registrar este software o sus derivados como propiedad exclusiva de terceros.
+ */
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('project_members', function (Blueprint $table) {
+            $table->id();
+            //se agrego de aca 
+            $table->foreignId('project_id')->constrained('projects')->cascadeOnDelete();
+            $table->foreignId('student_id')->constrained('users')->cascadeOnDelete();
+            $table->boolean('is_leader')->default(false);
+            $table->unique(['project_id', 'student_id']); //hasta aca
+            $table->boolean('estado')->default(true);
+            $table->timestamps();
+        });
+    }
+
+    //project_id con cascadeOnDelete si se borra el proyecto, no tiene sentido conservar sus filas 
+
+    //tudent_id con cascadeOnDelete si se borra el estudiante, se elimina  todo lo de el 
+
+    //primary(['project_id', 'student_id']): igual que en article_tag son tablas pivote
+    //esto también evita que se pueda agregar al mismo estudiante dos veces al mismo proyecto
+
+
+
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('project_members');
+    }
+};

@@ -1,0 +1,7 @@
+NAME                     IMAGE                COMMAND                  SERVICE    CREATED        STATUS                   PORTS
+plantillawiki_db         postgres:17-alpine   "docker-entrypoint.s…"   pgsql      10 days ago    Up 6 minutes (healthy)   0.0.0.0:5439->5432/tcp, [::]:5439->5432/tcp
+plantillawiki_frontend   wiki-tda-frontend    "docker-entrypoint.s…"   frontend   34 hours ago   Up 6 minutes             0.0.0.0:3006->80/tcp, [::]:3006->80/tcp
+plantillawiki_mongo      mongo:4.4-bionic     "docker-entrypoint.s…"   mongodb    10 days ago    Up 6 minutes (healthy)   0.0.0.0:27018->27017/tcp, [::]:27018->27017/tcp
+plantillawiki_nginx      nginx:alpine         "/docker-entrypoint.…"   nginx      34 hours ago   Up 6 minutes             0.0.0.0:8006->80/tcp, [::]:8006->80/tcp
+plantillawiki_php        wiki-tda-php         "/usr/local/bin/entr…"   php        34 hours ago   Up 6 minutes             9000/tcp
+plantillawiki_redis      redis:alpine         "docker-entrypoint.s…"   redis      10 days ago    Up 6 minutes (healthy)   0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp

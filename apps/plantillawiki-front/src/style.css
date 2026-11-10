@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/* Prevención global de desbordamiento de texto en componentes Vuetify para resoluciones móviles/tablets */
+.v-btn {
+  max-width: 100%;
+}
+
+.v-btn__content {
+  white-space: normal;
+  text-align: center;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.v-chip {
+  max-width: 100%;
+  height: auto !important;
+  min-height: 24px;
+  padding-block: 3px;
+}
+
+.v-chip__content {
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  line-height: 1.25;
+}
+
+.v-card-title,
+.v-list-item-title,
+.v-list-item-subtitle {
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+}
+
+/* Estilos para visualización de contenido enriquecido de la Wiki */
+.wiki-rich-render h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: rgb(var(--v-theme-primary));
+  margin: 16px 0 8px;
+}
+
+.wiki-rich-render h3 {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: rgb(var(--v-theme-secondary));
+  margin: 14px 0 6px;
+}
+
+.wiki-rich-render p {
+  margin-bottom: 12px;
+  line-height: 1.75;
+}
+
+.wiki-rich-render ul,
+.wiki-rich-render ol {
+  padding-left: 24px;
+  margin-bottom: 12px;
+}
+
+.wiki-rich-render pre,
+.wiki-rich-render .wiki-code-block {
+  background: #0d1239;
+  color: #e8eeff;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-family: monospace;
+  font-size: 0.86rem;
+  overflow-x: auto;
+  margin: 12px 0;
+}
+
+.wiki-rich-render blockquote,
+.wiki-rich-render .wiki-callout {
+  border-left: 4px solid rgb(var(--v-theme-primary));
+  background: rgba(var(--v-theme-primary), 0.06);
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  margin: 12px 0;
+}
+
+
