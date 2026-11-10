@@ -23,6 +23,7 @@ services:
     volumes:
       - ./apps/plantillawiki:/var/www
       - ./apps/plantillawiki/docker/php/entrypoint.sh:/usr/local/bin/entrypoint.sh
+    entrypoint: ["sh", "/usr/local/bin/entrypoint.sh"]
     working_dir: /var/www
     depends_on:
       pgsql:
