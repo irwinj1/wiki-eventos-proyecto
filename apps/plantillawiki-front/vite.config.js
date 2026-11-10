@@ -15,12 +15,17 @@ export default defineConfig(({ mode }) => {
     ],
     server: {
       host: true,
+      allowedHosts: true,
       port: parseInt(process.env.PORT || "3006", 10),
       watch: {
         usePolling: true
       },
       proxy: {
         '/api': {
+          target: env.API_PROXY_TARGET || 'http://127.0.0.1:8006',
+          changeOrigin: true
+        },
+        '/storage': {
           target: env.API_PROXY_TARGET || 'http://127.0.0.1:8006',
           changeOrigin: true
         }
